@@ -76,7 +76,7 @@ def miner_to_ore(world, entity, ore):
    ore_pt = ore.get_position()
    if adjacent(entity_pt, ore_pt):
       entity.set_resource_count(
-         1 + entities.get_resource_count(entity))
+         1 + entity.get_resource_count())
       remove_entity(world, ore)
       return ([ore_pt], True)
    else:
@@ -91,8 +91,8 @@ def miner_to_smith(world, entity, smith):
    smith_pt = smith.get_position()
    if adjacent(entity_pt, smith_pt):
       smith.set_resource_count(
-         entities.get_resource_count(smith) +
-         entities.get_resource_count(entity))
+         smith.get_resource_count() +
+         entity.get_resource_count())
       entity.set_resource_count(0)
       return ([], True)
    else:
@@ -195,7 +195,7 @@ def create_vein_action(world, entity, i_store):
       entities.remove_pending_action(entity, action)
 
       open_pt = find_open_around(world, entity.get_position(),
-         entities.get_resource_distance(entity))
+         entity.get_resource_distance())
       if open_pt:
          ore = create_ore(world,
             "ore - " + entities.get_name(entity) + " - " + str(current_ticks),
@@ -214,7 +214,7 @@ def create_vein_action(world, entity, i_store):
 
 def try_transform_miner_full(world, entity):
    new_entity = entities.MinerNotFull(
-      entities.get_name(entity), entities.get_resource_limit(entity),
+      entities.get_name(entity), entity.get_resource_limit(),
       entity.get_position(), entity.get_rate(),
       entity.get_images(), entities.get_animation_rate(entity))
 
@@ -226,7 +226,7 @@ def try_transform_miner_not_full(world, entity):
       return entity
    else:
       new_entity = entities.MinerFull(
-         entities.get_name(entity), entities.get_resource_limit(entity),
+         entities.get_name(entity), entity.get_resource_limit(),
          entity.get_position(), entity.get_rate(),
          entity.get_images(), entities.get_animation_rate(entity))
       return new_entity

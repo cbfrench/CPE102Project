@@ -35,6 +35,10 @@ class MinerNotFull:
       return self.rate
    def set_resource_count(self, n):
       self.resource_count = n
+   def get_resource_count(self):
+      return self.resource_count
+   def get_resource_limit(self):
+      return self.resource_limit
 
 class MinerFull:
    def __init__(self, name, resource_limit, position, rate, imgs,
@@ -60,6 +64,10 @@ class MinerFull:
       return self.rate
    def set_resource_count(self, n):
       self.resource_count = n
+   def get_resource_count(self):
+      return self.resource_count
+   def get_resource_limit(self):
+      return self.resource_limit
 
 class Vein:
    def __init__(self, name, rate, position, imgs, resource_distance=1):
@@ -80,6 +88,8 @@ class Vein:
       return self.imgs[self.current_img]
    def get_rate(self):
       return self.rate
+   def get_resource_distance(self):
+      return self.resource_distance
 
 class Ore:
    def __init__(self, name, position, imgs, rate=5000):
@@ -124,6 +134,12 @@ class Blacksmith:
       return self.rate
    def set_resource_count(self, n):
       self.resource_count = n
+   def get_resource_count(self):
+      return self.resource_count
+   def get_resource_limit(self):
+      return self.resource_limit
+   def get_resource_distance(self):
+      return self.resource_distance
   
 class Obstacle:
    def __init__(self, name, position, imgs):
@@ -176,19 +192,7 @@ class Quake:
       return self.imgs 
    def get_image(self):
       return self.imgs[self.current_img]
-
-
-def get_resource_count(entity):
-   return entity.resource_count
-
-
-def get_resource_limit(entity):
-   return entity.resource_limit
-
-
-def get_resource_distance(entity):
-   return entity.resource_distance
-
+   
 
 def get_name(entity):
    return entity.name
