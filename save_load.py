@@ -58,7 +58,18 @@ def save_world(world, file):
 
 def save_entities(world, file):
    for entity in worldmodel.get_entities(world):
-      file.write(entities.entity_string(entity) + '\n')
+      if isinstance(entity, MinerFull) or isinstance(MinerNotFull):
+         file.write(entity.miner_string() + '\n')
+      elif isinstance(entity, Blacksmith):
+         file.write(entity.blacksmith_string() + '\n')
+      elif isinstance(entity, Vein):
+         file.write(entity.vein_string() + '\n')
+      elif isinstance(entity, Obstacle):
+         file.write(entity.obstacle_string() + '\n')
+      elif isinstance(entity, Ore):
+         file.write(entity.ore_string() + '\n')
+      else:
+         file.write(entities.entity_string(entity) + '\n')
 
 
 def save_background(world, file):

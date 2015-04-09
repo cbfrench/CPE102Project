@@ -254,7 +254,7 @@ def create_animation_action(world, entity, repeat_count):
    def action(current_ticks):
       entity.remove_pending_action(action)
 
-      entities.next_image(entity)
+      entity.next_image()
 
       if repeat_count != 1:
          schedule_action(world, entity,
